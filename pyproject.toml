@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "keksik-api"
+version = "0.1.0"
+description = "Обвертка над API keksik.io"
+authors = ["lordralinc <lordralinc@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "keksik_api"}]
+
+[tool.poetry.dependencies]
+python = ">=3.8,<4.0"
+pydantic = ">=1.10,<2.0"
+aiohttp = ">=3.8,<4.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
