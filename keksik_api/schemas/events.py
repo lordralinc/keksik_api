@@ -1,13 +1,10 @@
 import enum
-import typing
 
 import pydantic
 
-from .donates import Donate
-from .payments import Payment
-
-if typing.TYPE_CHECKING:
-    from keksik_api import KeksikAPI
+from keksik_api.api import KeksikAPI
+from keksik_api.schemas.donates import Donate
+from keksik_api.schemas.payments import Payment
 
 __all__ = (
     'EventType',
@@ -27,7 +24,10 @@ class Event(pydantic.BaseModel):
     group_id: int = pydantic.Field(alias='group')
     type: EventType
     hash: str
-    api: "KeksikAPI"
+    api: KeksikAPI
+
+    class Config(pydantic.BaseConfig):
+        arbitrary_types_allowed = True
 
 
 class DonateEvent(Event):

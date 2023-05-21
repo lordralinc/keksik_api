@@ -7,10 +7,9 @@ from keksik_api.base import ABCAPI
 from keksik_api.exceptions import KeksikAPIException
 from keksik_api.methods.campaigns import CampaignsCategory
 from keksik_api.methods.donates import DonatesCategory
+from keksik_api.methods.payments import PaymentsCategory
 
 __all__ = ('KeksikAPI',)
-
-from keksik_api.methods.payments import PaymentsCategory
 
 logger = logging.getLogger('keksik_api')
 
