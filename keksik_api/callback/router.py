@@ -1,3 +1,4 @@
+import logging
 import typing
 
 from keksik_api import schemas
@@ -5,6 +6,8 @@ from keksik_api.callback.handler import Handler
 from keksik_api.callback.rules import Rule, EventTypeRule
 
 __all__ = ('Router',)
+
+logger = logging.getLogger('keksik_api.callback')
 
 
 class Router:
@@ -50,6 +53,7 @@ class Router:
         return decorator
 
     async def route(self, event: schemas.Event):
+        logger.debug(f"Process event: {event}")
         for handler in self.handlers:
             if await handler.check(event):
                 await handler.handle(event)

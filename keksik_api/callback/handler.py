@@ -26,3 +26,6 @@ class Handler:
 
     async def handle(self, event: schemas.Event):
         return await self.handler(event)
+
+    def __repr__(self):
+        return f"Handler({self.handler.__name__}, rules={self.rules})"

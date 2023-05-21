@@ -1,10 +1,13 @@
 import hashlib
+import logging
 import typing
 
 from keksik_api import KeksikAPI, schemas
 from keksik_api.callback.router import Router
 
 __all__ = ('Callback',)
+
+logger = logging.getLogger('keksik_api.callback')
 
 
 class Callback:
@@ -46,6 +49,7 @@ class Callback:
         return hash_dict
 
     async def route_web_request(self, event: dict) -> dict:
+        logger.debug(f"New event: {event}")
         if not self.check_hash(event.copy()):
             return {"status": "error", "msg": "Invalid hash"}
         if event.get('type') == 'confirmation':
