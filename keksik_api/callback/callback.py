@@ -2,7 +2,8 @@ import hashlib
 import logging
 import typing
 
-from keksik_api import KeksikAPI, schemas
+from keksik_api.api import KeksikAPI
+from keksik_api.schemas.events import EventType, Event, DonateEvent, PaymentStatusEvent
 from keksik_api.callback.router import Router
 
 __all__ = ('Callback',)
@@ -58,11 +59,11 @@ class Callback:
             return {"status": "ok", "code": self._confirmation_code}
 
         type_to_dataclass = {
-            schemas.EventType.NEW_DONATE.value: schemas.DonateEvent,
-            schemas.EventType.PAYMENT_STATUS.value: schemas.PaymentStatusEvent,
+            EventType.NEW_DONATE.value: DonateEvent,
+            EventType.PAYMENT_STATUS.value: PaymentStatusEvent,
         }
         if event.get('type') not in type_to_dataclass:
-            dataclass = schemas.Event
+            dataclass = Event
         else:
             dataclass = type_to_dataclass[event['type']]
         await self.router.route(dataclass.parse_obj({**event, "api": self.api}))
