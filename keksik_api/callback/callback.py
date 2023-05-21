@@ -33,7 +33,12 @@ class Callback:
         params = dict(sorted(params.items()))
         params_values = list(params.values())
         params_values.append(self._secret_key)
-        hash_str = ','.join(params_values)
+        hash_str = ','.join([
+            ("1" if value else "") if isinstance(value, bool) else
+            str(value) if not isinstance(value, str) else
+            value
+            for value in params_values
+        ])
         sha256 = hashlib.sha256(hash_str.encode()).hexdigest()
         return sha256 == hash_value
 
