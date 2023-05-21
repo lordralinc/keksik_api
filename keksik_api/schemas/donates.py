@@ -37,10 +37,10 @@ class Donate(BaseModel):
     user_id: int = pydantic.Field(alias='user')
     date: datetime.datetime
     amount: int
-    total: typing.Optional[int]
+    total: typing.Optional[int] = None
     message: typing.Optional[str] = pydantic.Field(None, alias='msg')
     is_anonymous: bool = pydantic.Field(alias='anonym')
-    answer: str
+    answer: typing.Optional[str] = None
     vkpay: bool
     status: DonateStatus
     reward: typing.Optional[typing.List[Reward]] = None
