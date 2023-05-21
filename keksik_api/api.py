@@ -10,6 +10,8 @@ from keksik_api.methods.donates import DonatesCategory
 
 __all__ = ('KeksikAPI',)
 
+from keksik_api.methods.payments import PaymentsCategory
+
 logger = logging.getLogger('keksik_api')
 
 
@@ -36,9 +38,14 @@ class KeksikAPI(ABCAPI):
         return CampaignsCategory(self)
 
     @property
+    def payments(self) -> PaymentsCategory:
+        return PaymentsCategory(self)
+
+    @property
     def session(self) -> aiohttp.ClientSession:
         if not self._session:
             self._session = aiohttp.ClientSession(
+                base_url='https://api.keksik.io',
                 headers={
                     'User-Agent': "lordralinc/keksik_api",
                     'Content-Type': 'application/json'
@@ -54,11 +61,11 @@ class KeksikAPI(ABCAPI):
             method: str,
             params: typing.Dict[str, typing.Any],
             /,
-            raise_errors: bool = False,
+            raise_errors: bool = True,
             clean_none: bool = True
     ) -> dict:
         if clean_none:
-            params = dict({k: v for k, v in params if v is not None})
+            params = dict({k: v for k, v in params.items() if v is not None})
 
         logger.debug(f"Make request to {method} with params {params}")
 
@@ -67,7 +74,7 @@ class KeksikAPI(ABCAPI):
         params.setdefault('v', self.api_version)
 
         async with self.session.post(
-                f'https://api.keksik.io/{method}',
+                f'/{method}',
                 json=params
         ) as response:
             json_response = await response.json()
