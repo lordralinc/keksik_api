@@ -1,10 +1,12 @@
 [tool.poetry]
 name = "keksik-api"
-version = "0.1.6"
+version = "0.2.0"
 description = "Обвертка над API keksik.io"
 authors = ["lordralinc <lordralinc@gmail.com>"]
 license = "MIT"
 readme = "README.md"
+homepage = "https://github.com/lordralinc/keksik_api"
+repository = "https://github.com/lordralinc/keksik_api"
 packages = [{include = "keksik_api"}]
 
 [tool.poetry.dependencies]

@@ -2,6 +2,11 @@
 
 Обвертка над API [keksik.io](https://keksik.io/api)
 
+<p align="center">
+  <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/keksik-api">
+  <img alt="PyPI" src="https://img.shields.io/pypi/v/keksik-api?color=green&label=PyPI">
+</p>
+
 # Использование:
 ```python
 import os
