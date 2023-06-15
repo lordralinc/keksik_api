@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "keksik-api"
-version = "0.2.0"
+version = "0.2.1"
 description = "Обвертка над API keksik.io"
 authors = ["lordralinc <lordralinc@gmail.com>"]
 license = "MIT"

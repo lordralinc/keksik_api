@@ -1,4 +1,5 @@
 import datetime
+import random
 import typing
 
 from keksik_api import schemas
@@ -145,4 +146,46 @@ class DonatesCategory(BaseMethodCategory):
             )
         )
 
+    @staticmethod
+    def generate_op_code() -> int:
+        """Сгенерировать целое положительное число, которое присваивается донату,
+        при переходе пользователя по ссылке при донате.
+        """
+        return random.randint(1, 4294967295)
 
+    def generate_donate_link(
+            self,
+            donate_sum: typing.Optional[typing.Union[int, bool]] = None,
+            op_code: typing.Optional[int] = None,
+            *,
+            group_id: typing.Optional[int] = None,
+    ) -> str:
+        """Генерирует ссылку на донат
+
+        :param donate_sum: Сумма автоподставления
+        :param op_code: целое положительное число, которое присваивается донату,
+            при переходе пользователя по ссылке при донате. Если указать True,
+            откроется окно с вводом доната.
+        :param group_id: ID группы
+        :return:
+        """
+        group_id = group_id or self.api.group_id
+        if group_id is None:
+            raise ValueError("group_id is required")
+        if op_code is not None:
+            if op_code < 1 or op_code > 4294967295:
+                raise ValueError("op_code must be in range(1, 4294967296)")
+        hash_values = []
+        if op_code:
+            hash_values.append(f"op_{op_code}")
+        if donate_sum is not None:
+            if isinstance(donate_sum, bool):
+                if donate_sum:
+                    hash_values.append(f"donate")
+            elif isinstance(donate_sum, int):
+                hash_values.append(f"donate_{donate_sum}")
+
+        return "https://vk.com/app6887721_{group_id}{hash}".format(
+            group_id=-abs(group_id),
+            hash="#" + "&".join(hash_values) if hash_values else ""
+        )
