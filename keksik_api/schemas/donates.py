@@ -43,7 +43,7 @@ class Donate(BaseModel):
     answer: typing.Optional[str] = None
     vkpay: bool
     status: DonateStatus
-    reward: typing.Optional[typing.List[Reward]] = None
+    reward: typing.Optional[Reward] = None
     op: typing.Optional[int] = None
 
 
