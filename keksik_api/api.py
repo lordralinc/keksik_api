@@ -21,7 +21,7 @@ class KeksikAPI(ABCAPI):
             group_id: int,
             access_token: str,
             api_version: typing.Literal[1] = 1,
-            session: aiohttp.ClientSession | None = None,
+            session: typing.Union[aiohttp.ClientSession, None] = None,
     ):
         self.group_id = group_id
         self.api_version = api_version
