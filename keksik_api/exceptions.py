@@ -29,7 +29,7 @@ class KeksikAPIException(Exception):
     success: typing.Literal[False] = False
     error_code: KeksikErrorCode
     message: str
-    extra: dict[str, typing.Any]
+    extra: typing.Dict[str, typing.Any]
 
     def __init__(self, **kwargs):
         self.error_code = KeksikErrorCode(kwargs.get('error', KeksikErrorCode.UNKNOWN_METHOD))
