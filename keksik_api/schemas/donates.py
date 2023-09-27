@@ -2,7 +2,10 @@ import datetime
 import enum
 import typing
 
-import pydantic
+try:
+    import pydantic.v1 as pydantic
+except ImportError:
+    import pydantic
 
 from keksik_api.schemas.base import BaseModel, BaseResponse
 

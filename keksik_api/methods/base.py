@@ -7,3 +7,5 @@ class BaseMethodCategory:
 
     def __init__(self, api: ABCAPI):
         self.api = api
+
+

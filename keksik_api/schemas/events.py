@@ -1,6 +1,9 @@
 import enum
 
-import pydantic
+try:
+    import pydantic.v1 as pydantic
+except ImportError:
+    import pydantic
 
 from keksik_api.api import KeksikAPI
 from keksik_api.schemas.donates import Donate

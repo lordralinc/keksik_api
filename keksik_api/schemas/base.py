@@ -1,8 +1,11 @@
 import typing
 
-import pydantic
-
 from keksik_api.exceptions import KeksikErrorCode
+
+try:
+    import pydantic.v1 as pydantic
+except ImportError:
+    import pydantic
 
 __all__ = ('BaseModel', 'BaseResponse',)
 

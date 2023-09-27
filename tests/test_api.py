@@ -6,6 +6,7 @@ from keksik_api import KeksikAPI, KeksikAPIException
 from keksik_api.schemas import PaymentsBalanceResponse
 from tests.utils import make_session
 
+
 @pytest.mark.asyncio
 async def test_simple_request(aiohttp_client):
     response = dict(
@@ -58,4 +59,3 @@ async def test_validation(aiohttp_client):
         )
     )
     assert response == await api.payments.balance()
-
